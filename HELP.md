@@ -3,7 +3,7 @@
 ### Deploy this project as an App Service, alternatively as a container instance
 
 * Setup a MySQL service
-* Update settings.json with url, username, password and db-name
+* Update application.properties with url, username, password and db-name
 * Deploy project
 
 ### Success
