@@ -9,15 +9,11 @@ public class ImageMeta {
     @Id
     @GeneratedValue
     private long id;
+    private String fileName;
     private String description;
     private int rating;
 
     public ImageMeta() {
-    }
-
-    public ImageMeta(String description, int rating) {
-        this.description = description;
-        this.rating = rating;
     }
 
     public long getId() {
@@ -42,6 +38,14 @@ public class ImageMeta {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
