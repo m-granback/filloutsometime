@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://192.168.1.172:80", "http://localhost:80", "http://127.0.0.1:80", "http://192.168.1.172:8080", "http://localhost", "http://localhost:80"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = {"http://192.168.1.172:80", "http://localhost:80", "http://127.0.0.1:80", "http://192.168.1.172:8080", "http://localhost", "http://localhost:80","http://192.168.1.85"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class TodoController {
     @Autowired
     private TodoService todoService;
