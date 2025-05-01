@@ -1,7 +1,12 @@
 package com.example.filloutsometime.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,7 +18,8 @@ public class Owner {
     private String firstName;
     private String lastName;
     private String home;
-    @OneToMany
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Horse> listOfHorses;
 
     public Owner() {
@@ -26,10 +32,19 @@ public class Owner {
     }
 
     public int getNumberOfHorses(){
-        return 99;
+        return listOfHorses.size();
     }
-    public int getNumberOfHorsesWithinThreeWeekNotice(){
-        return 99;
+    public int getNumberOfHorsesWithinSixWeeksNotice(){
+        List<Horse> horsesGettingUrgent = new ArrayList<>();
+        for (Horse horse :
+                listOfHorses) {
+            LocalDate horseLastShod = horse.getLastShod();
+            LocalDate today = LocalDate.now();
+            if(horseLastShod.isBefore(today.minusWeeks(6))){
+                horsesGettingUrgent.add(horse);
+            }
+        }
+        return horsesGettingUrgent.size();
     }
     public Integer getId() {
         return id;

@@ -1,11 +1,10 @@
 package com.example.filloutsometime.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 public class Horse {
@@ -16,6 +15,9 @@ public class Horse {
     private LocalDate birth;
     private String shoeSize;
     private LocalDate lastShod;
+    @ManyToOne
+    @JsonBackReference
+    private Owner owner;
 
     public Horse() {
     }
@@ -29,6 +31,19 @@ public class Horse {
     public Horse(String name, LocalDate birth) {
         this.name = name;
         this.birth = birth;
+    }
+
+    public Horse(String name, LocalDate birth, Owner owner) {
+        this.name = name;
+        this.birth = birth;
+        this.owner = owner;
+    }
+
+    public Horse(String name, LocalDate birth, String shoeSize, Owner owner) {
+        this.name = name;
+        this.birth = birth;
+        this.shoeSize = shoeSize;
+        this.owner = owner;
     }
 
     public Integer getId() {
@@ -70,7 +85,15 @@ public class Horse {
     public void setLastShod(LocalDate lastShod) {
         this.lastShod = lastShod;
     }
-    public int age(){
-        return 99;
+    public int getAge(){
+        return Period.between(this.birth, LocalDate.now()).getYears();
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }
